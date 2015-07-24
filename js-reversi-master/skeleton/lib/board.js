@@ -127,6 +127,18 @@ function _positionsToFlip (board, pos, color, dir, piecesToFlip) {
  * Throws an error if the position represents an invalid move.
  */
 Board.prototype.placePiece = function (pos, color) {
+  if ( !this.validMove(pos, color )) {
+    throw new Error "pos not a valid move";
+  } else {
+    flips = []
+    for (var i = 0; i < 8; i++) {
+      var dir = Board.DIRS[i]
+      flips = flips.concat(_positionsToFlip(this, pos, color, dir, []) )
+    }
+    for (var i = 0; i < flips.length; i++) {
+      flips[i].flip
+    }
+  }
 };
 
 /**
